@@ -1,4 +1,4 @@
 import App from 'next/app'
-import '../static/style/pages/common.css'
+import '../static/style/pages/comm.css'
 
 export default App

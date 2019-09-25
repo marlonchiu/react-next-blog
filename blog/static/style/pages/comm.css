@@ -1,0 +1,21 @@
+/* 全局公共样式 */
+body {
+  background-color: #f6f6f6 !important;
+}
+
+.comm-main{
+  margin-top: .5rem;
+}
+.comm-left{
+  background-color: #fff;
+  padding:.3rem;
+  border-radius: .3rem;
+  border-bottom:1px solid #eee;
+}
+.comm-right{
+  background-color: #fff;
+  margin-left: .5rem;
+  padding:.3rem;
+  border-radius: .3rem;
+  border-bottom:1px solid #eee;
+}
