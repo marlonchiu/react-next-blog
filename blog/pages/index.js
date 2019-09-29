@@ -4,6 +4,7 @@ import { Row, Col, List, Icon } from 'antd'
 import Header from '../components/Header'
 import Author from '../components/Author'
 import Advert from '../components/Advert'
+import Footer from '../components/Footer'
 import '../static/style/pages/index.css'
 
 function Home () {
@@ -62,6 +63,7 @@ function Home () {
           <Advert />
         </Col>
       </Row>
+      <Footer/>
     </>
   )
 }
