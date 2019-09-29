@@ -13,8 +13,10 @@ const Header = () => (
       <Col className='menu-list' xs={0} sm={0} md={14} lg={8} xl={6}>
         <Menu mode='horizontal'>
           <Item key='home'>
-            <Icon type='home' />
-            首页
+            <a href='/'>
+              <Icon type='home' />
+              首页
+            </a>
           </Item>
           <Item key='video'>
             <Icon type='youtube' />

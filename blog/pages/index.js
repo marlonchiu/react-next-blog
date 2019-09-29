@@ -63,7 +63,7 @@ function Home () {
           <Advert />
         </Col>
       </Row>
-      <Footer/>
+      <Footer />
     </>
   )
 }
