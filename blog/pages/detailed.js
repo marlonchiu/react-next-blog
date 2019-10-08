@@ -2,10 +2,10 @@ import React from 'react'
 import Head from 'next/head'
 import { Row, Col } from 'antd'
 import Header from '../components/Header'
-const Detail = () => (
+const Detailed = () => (
   <>
     <Head>
-      <title>Detail</title>
+      <title>Detailed</title>
     </Head>
     <Header />
     <Row className='comm-main' type='flex' justify='center'>
@@ -19,4 +19,4 @@ const Detail = () => (
   </>
 )
 
-export default Detail
+export default Detailed
