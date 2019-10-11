@@ -1,32 +1,14 @@
 import React from 'react'
 import Head from 'next/head'
-import { Row, Col, Icon, Breadcrumb } from 'antd'
+import { Row, Col, Icon, Breadcrumb, Affix } from 'antd'
 import Header from '../components/Header'
 import Author from '../components/Author'
 import Advert from '../components/Advert'
 import Footer from '../components/Footer'
 import '../static/style/pages/detailed.css'
 import ReactMarkdown from 'react-markdown'
-// const ReactMarkdown = require('react-markdown/with-html')
-
-// const markdown = `
-// # Live demo
-
-// Changes are automatically rendered as you type.
-
-// ## Table of Contents
-
-// * Implements [GitHub Flavored Markdown](https://github.github.com/gfm/)
-// * Renders actual, "native" React DOM elementsddd
-// * Allows you to escape or skip HTML (try toggling the checkboxes above)
-// * If you escape or skip the HTML, no <code>dangerouslySetInnerHTML</code> is used! Yay!
-
-// ## HTML block below
-
-// <blockquote>
-//   This blockquote will change based on the HTML settings above.
-// </blockquote>
-// `
+import MarkNav from 'markdown-navbar'
+import 'markdown-navbar/dist/navbar.css'
 
 const markdown = '# P01:课程介绍和环境搭建\n' +
   '[ **M** ] arkdown + E [ **ditor** ] = **Mditor**  \n' +
@@ -41,6 +23,22 @@ const markdown = '# P01:课程介绍和环境搭建\n' +
   '>> bbbbbbbbb\n' +
   '>>> cccccccccc\n' +
   '***\n\n\n' +
+  '# p03:Vue3.0基础知识讲解\n' +
+  '> aaaaaaaaa\n' +
+  '>> bbbbbbbbb\n' +
+  '>>> cccccccccc\n\n' +
+  '# p04:Vue3.0基础知识讲解\n' +
+  '> aaaaaaaaa\n' +
+  '>> bbbbbbbbb\n' +
+  '>>> cccccccccc\n\n' +
+  '#5 p05:Vue3.0基础知识讲解\n' +
+  '> aaaaaaaaa\n' +
+  '>> bbbbbbbbb\n' +
+  '>>> cccccccccc\n\n' +
+  '# p06:Vue3.0基础知识讲解\n' +
+  '> aaaaaaaaa\n' +
+  '>> bbbbbbbbb\n' +
+  '>>> cccccccccc\n\n' +
   '# p03:Vue3.0基础知识讲解\n' +
   '> aaaaaaaaa\n' +
   '>> bbbbbbbbb\n' +
@@ -100,6 +98,16 @@ const Detailed = () => (
       <Col className='comm-right' xs={0} sm={0} md={7} lg={5} xl={4}>
         <Author />
         <Advert />
+        <Affix offsetTop={5}>
+          <div className='detailed-nav comm-box'>
+            <div className='nav-title'>文章目录</div>
+            <MarkNav
+              className='article-menu'
+              source={markdown}
+              ordered={false}
+            />
+          </div>
+        </Affix>
       </Col>
     </Row>
     <Footer />
