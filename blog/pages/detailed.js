@@ -100,7 +100,10 @@ const Detailed = () => (
         <Advert />
         <Affix offsetTop={5}>
           <div className='detailed-nav comm-box'>
-            <div className='nav-title'>文章目录</div>
+            <div className='nav-title'>
+              <Icon type='book' />
+              文章目录
+            </div>
             <MarkNav
               className='article-menu'
               source={markdown}
