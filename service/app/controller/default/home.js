@@ -4,10 +4,7 @@ const Controller = require('egg').Controller;
 
 class HomeController extends Controller {
   async index() {
-    const {
-      ctx,
-      app
-    } = this
+    const { ctx, app } = this
     // const result = await app.mysql.get('blog_content', {})
     // console.log(result)
     // ctx.body = result;
@@ -34,25 +31,24 @@ class HomeController extends Controller {
   }
 
   // 获取文章详情
-  async getArticleById() {
-
+  async getArticleById () {
     const { ctx, app } = this
     // 先配置路由的动态传值，然后再接收值
-    const ArticleId = ctx.params.id
+    const articleId = ctx.params.id
 
-    const sql =
+    const sql2 =
       'SELECT article.id as id, ' +
       'article.title as title, ' +
       'article.introduce as introduce, ' +
-      'article.article_content as article_content, ' +
+      'article.content as content, ' +
       "FROM_UNIXTIME(article.addTime, '%Y-%m-%d %H:%i:%s') as addTime, " +
       'article.view_count as view_count, ' +
-      'type.typeName as typeName ' +
+      'type.typeName as typeName, ' +
       'type.id as typeId ' +
       'FROM article LEFT JOIN type ON article.type_id = type.id' +
-      'WHERE article.id=' + ArticleId
+      'WHERE article.id=' + articleId
 
-    const result = await app.mysql.query(sql)
+    const result = await app.mysql.query(sql2)
     ctx.body = {
       data: result
     }
