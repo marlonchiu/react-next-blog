@@ -9,6 +9,7 @@ import '../static/style/pages/detailed.css'
 import ReactMarkdown from 'react-markdown'
 import MarkNav from 'markdown-navbar'
 import 'markdown-navbar/dist/navbar.css'
+import { getArticleByIdRequest } from '../api/request'
 
 const markdown = '# P01:课程介绍和环境搭建\n' +
   '[ **M** ] arkdown + E [ **ditor** ] = **Mditor**  \n' +
@@ -116,5 +117,18 @@ const Detailed = () => (
     <Footer />
   </>
 )
+
+Detailed.getInitialProps = async (context) => {
+  console.log(context.query.id)
+  const id = context.query.id
+  const articleDetail = await new Promise((resolve) => {
+    getArticleByIdRequest(id).then(res => {
+      console.log('远程获取数据结果:', res)
+      resolve(res)
+    })
+  })
+
+  return articleDetail
+}
 
 export default Detailed
