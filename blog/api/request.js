@@ -1,4 +1,5 @@
 import { axiosInstance } from './config'
+// const prefix = '/default/'
 
 // 获取文章列表数据
 export const getArticleListRequest = () => {
