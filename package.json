@@ -1,0 +1,9 @@
+{
+  "name": "react-next-blog",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "blog": "cd blog && npm run dev",
+    "service": "cd service && npm run dev"
+  }
+}

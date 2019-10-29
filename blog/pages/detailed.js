@@ -123,7 +123,7 @@ Detailed.getInitialProps = async (context) => {
   const articleDetail = await new Promise((resolve) => {
     getArticleByIdRequest(id).then(res => {
       console.log('远程获取数据结果:', res)
-      // resolve(res)
+      resolve(res.data[0])
     })
   })
 
