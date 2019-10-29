@@ -45,7 +45,7 @@ class HomeController extends Controller {
     // 先配置路由的动态传值，然后再接收值
     const articleId = ctx.params.id
 
-    const sqlDetail =
+    const sql =
       'SELECT article.id as id, ' +
       'article.title as title, ' +
       'article.introduce as introduce, ' +
@@ -57,7 +57,19 @@ class HomeController extends Controller {
       'FROM article LEFT JOIN type ON article.type_id = type.id ' +
       'WHERE article.id=' + articleId
 
-    const result = await app.mysql.query(sqlDetail)
+    const result = await app.mysql.query(sql)
+    ctx.body = {
+      data: result
+    }
+  }
+
+  // 得到类别名称和编号
+  async getTypeInfo () {
+    const {
+      ctx,
+      app
+    } = this
+    const result = await app.mysql.select('type')
     ctx.body = {
       data: result
     }

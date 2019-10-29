@@ -10,3 +10,8 @@ export const getArticleListRequest = () => {
 export const getArticleByIdRequest = (id) => {
   return axiosInstance.get(`/default/getArticleById/${id}`)
 }
+
+// 获取文章详情数据
+export const getTypeInfoRequest = () => {
+  return axiosInstance.get('/default/getTypeInfo')
+}
