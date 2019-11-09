@@ -9,8 +9,27 @@ import Footer from '../components/Footer'
 import '../static/style/pages/index.css'
 import { getArticleListRequest } from '../api/request'
 
+import marked from 'marked'
+import hljs from 'highlight.js'
+import 'highlight.js/styles/monokai-sublime.css'
+
 function Home (list) {
   const [myList, setMyList] = useState(list.data)
+  const renderer = new marked.Renderer()
+
+  marked.setOptions({
+    renderer: renderer,
+    gfm: true,
+    pedantic: false,
+    sanitize: false,
+    tables: true,
+    breaks: false,
+    smartLists: true,
+    smartypants: false,
+    highlight: function (code) {
+      return hljs.highlightAuto(code).value
+    }
+  })
 
   return (
     <>
@@ -38,7 +57,7 @@ function Home (list) {
                       <span><Icon type='folder' />{item.typeName}</span>
                       <span><Icon type='fire' />{item.view_count}人</span>
                     </div>
-                    <div className='list-context'>{item.introduce}</div>
+                    <div className='list-context' dangerouslySetInnerHTML={{ __html: marked(item.introduce) }} />
                   </List.Item>
                 )
               }
