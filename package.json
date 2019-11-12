@@ -4,6 +4,7 @@
   "description": "",
   "scripts": {
     "blog": "cd blog && npm run dev",
+    "admin": "cd admin && npm run start",
     "service": "cd service && npm run dev"
   }
 }
