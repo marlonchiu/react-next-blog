@@ -1,0 +1,12 @@
+body {
+  background-color: #f0f0f0;
+}
+
+.login-wrap {
+  margin: 150px auto;
+  width: 400px;
+}
+
+.login-card {
+  border-radius: 6px;
+}
