@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Card, Input, Icon, Button, Spin } from 'antd'
 import '../static/css/Login.css'
 
-function Login() {
+function Login () {
   const [userName, setUserName] = useState('admin')
   const [password, setPassword] = useState('123456')
   const [isLoading, setIsLoading] = useState(false)
