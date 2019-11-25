@@ -6,6 +6,45 @@ const { Option } = Select
 const { TextArea } = Input
 
 function AddArticle () {
+  const [articleId, setArticleId] = useState(0) // 文章的ID，如果是0说明是新增加，如果不是0，说明是修改
+  const [articleTitle, setArticleTitle] = useState('') // 文章标题
+
+  const [articleContent, setArticleContent] = useState('') // markdown的编辑内容
+  const [markdownContent, setMarkdownContent] = useState('预览内容...') // html内容
+
+  const [introduceMarkdown, setIntroduceMarkdown] = useState(null) // 简介的markdown内容
+  const [introduceHtml, setIntroduceHtml] = useState('等待编辑') // 简介的html内容
+
+  const [createDate, setCreateDate] = useState() // 发布日期
+  const [updateDate, setUpdateDate] = useState() // 修改日志的日期
+
+  const [typeInfo, setTypeInfo] = useState([]) // 文章类别信息
+  const [selectedType, setSelectType] = useState(1) // 选择的文章类别
+
+  const renderer = new marked.Renderer()
+  marked.setOptions({
+    renderer: renderer,
+    gfm: true,
+    pedantic: false,
+    sanitize: false,
+    tables: true,
+    breaks: false,
+    smartLists: true,
+    smartypants: false
+  })
+
+  // 编写实时预览对应的方法
+  const changeContent = (e) => {
+    setArticleContent(e.target.value)
+    const html = marked(e.target.value)
+    setMarkdownContent(html)
+  }
+  const changeIntroduce = (e) => {
+    setIntroduceMarkdown(e.target.value)
+    const html = marked(e.target.value)
+    setIntroduceHtml(html)
+  }
+
   return (
     <div className='add-article'>
       <Row gutter={5}>
@@ -27,15 +66,16 @@ function AddArticle () {
           <Row gutter={10}>
             <Col span={12}>
               <TextArea
+                value={articleContent}
                 className='markdown-content'
                 rows={35}
+                onChange={changeContent}
+                onPressEnter={changeContent}
                 placeholder='文章内容'
               />
             </Col>
             <Col span={12}>
-              <div className='show-html'>
-                文章预览
-              </div>
+              <div className='show-html' dangerouslySetInnerHTML={{ __html: markdownContent }} />
             </Col>
           </Row>
         </Col>
@@ -51,15 +91,19 @@ function AddArticle () {
           <Row>
             <Col span={24}>
               <br />
-              <TextArea rows={4} placeholder='文章简介' />
+              <TextArea
+                rows={4}
+                placeholder='文章简介'
+                value={introduceMarkdown}
+                onChange={changeIntroduce}
+                onPressEnter={changeIntroduce}
+              />
             </Col>
           </Row>
           <Row>
             <Col span={24}>
               <br />
-              <div className='introduce-html'>
-                文章状态：
-              </div>
+              <div className='introduce-html' dangerouslySetInnerHTML={{ __html: `文章简介：${introduceHtml}` }} />
             </Col>
           </Row>
           <Row>
