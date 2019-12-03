@@ -47,13 +47,13 @@ module.exports = appInfo => {
     csrf: {
       enable: false
     },
-    domainWhiteList: [ '*' ]
-  };
+    domainWhiteList: ['*']
+  }
   config.cors = {
-    origin: '*',
-    credentials: true,
+    origin: 'http://localhost:3000',
+    credentials: true, // 允许跨域
     allowMethods: 'GET, HEAD, PUT, POST, DELETE, PATCH, OPTIONS, UPDATE'
-  };
+  }
 
   return {
     ...config,

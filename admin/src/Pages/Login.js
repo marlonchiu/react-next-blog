@@ -1,18 +1,44 @@
 import React, { useState } from 'react'
-import { Card, Input, Icon, Button, Spin } from 'antd'
+import { Card, Input, Icon, Button, Spin, message } from 'antd'
 import '../static/css/Login.css'
+import { checkLoginRequest } from '../config/request'
 
-function Login () {
+function Login (props) {
   const [userName, setUserName] = useState('admin')
-  const [password, setPassword] = useState('123456')
+  const [password, setPassword] = useState('')
   const [isLoading, setIsLoading] = useState(false)
 
   // 登录
   const checkLogin = () => {
     setIsLoading(true)
-    setTimeout(() => {
+    if (!userName) {
+      message.error('用户名不能为空')
+      setTimeout(() => {
+        setIsLoading(false)
+      }, 200)
+      return false
+    }
+    if (!password) {
+      message.error('密码不能为空')
+      setTimeout(() => {
+        setIsLoading(false)
+      }, 200)
+      return false
+    }
+
+    const dataProps = { userName, password }
+
+    checkLoginRequest(dataProps).then(res => {
+      // console.log(res)
       setIsLoading(false)
-    }, 1500)
+      if (res.status === 200) {
+        message.success(res.message)
+        localStorage.setItem('openId', res.openId)
+        props.history.push('/index')
+      } else {
+        message.error(res.message)
+      }
+    })
   }
 
   return (

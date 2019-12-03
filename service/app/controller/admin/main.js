@@ -23,11 +23,15 @@ class MainController extends Controller {
       const openId = new Date().getTime()
       session.openId = { openId: openId }
       ctx.body = {
-        data: '登录成功',
+        status: 200,
+        message: '登录成功',
         openId: openId
       }
     } else {
-      ctx.body = { data: '登录失败' }
+      ctx.body = {
+        status: 400,
+        message: '登录失败'
+      }
     }
   }
 }
