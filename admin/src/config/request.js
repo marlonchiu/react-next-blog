@@ -10,3 +10,13 @@ export const checkLoginRequest = (data) => {
     withCredentials: true // 前端后端共享 session
   })
 }
+
+// 获得文章类别信息
+export const getTypeInfoRequest = () => {
+  return axiosInstance({
+    method: 'get',
+    url: servicePath.getTypeInfo,
+    header: { 'Access-Control-Allow-Origin': '*' },
+    withCredentials: true // 前端后端共享 session
+  })
+}

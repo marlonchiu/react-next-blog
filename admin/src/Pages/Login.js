@@ -29,7 +29,7 @@ function Login (props) {
     const dataProps = { userName, password }
 
     checkLoginRequest(dataProps).then(res => {
-      // console.log(res)
+      console.log(res)
       setIsLoading(false)
       if (res.status === 200) {
         message.success(res.message)

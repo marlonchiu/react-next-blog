@@ -52,7 +52,7 @@ module.exports = appInfo => {
   config.cors = {
     origin: 'http://localhost:3000',
     credentials: true, // 允许跨域
-    allowMethods: 'GET, HEAD, PUT, POST, DELETE, PATCH, OPTIONS, UPDATE'
+    allowMethods: 'GET, HEAD, PUT, POST, DELETE, PATCH, OPTIONS'
   }
 
   return {
