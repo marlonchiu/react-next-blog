@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import storage from 'good-storage'
 import { Card, Input, Icon, Button, Spin, message } from 'antd'
 import '../static/css/Login.css'
 import { checkLoginRequest } from '../config/request'
@@ -33,7 +34,7 @@ function Login (props) {
       setIsLoading(false)
       if (res.status === 200) {
         message.success(res.message)
-        localStorage.setItem('openId', res.openId)
+        storage.set('openId', res.openId)
         props.history.push('/index')
       } else {
         message.error(res.message)

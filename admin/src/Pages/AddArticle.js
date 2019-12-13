@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react'
 import marked from 'marked'
 import '../static/css/AddArticle.css'
 import { getTypeInfoRequest } from '../config/request'
-import { Row, Col, Input, Select, Button, DatePicker } from 'antd'
+import storage from 'good-storage'
+import { Row, Col, Input, Select, Button, DatePicker, message } from 'antd'
 const { Option } = Select
 const { TextArea } = Input
 
@@ -59,12 +60,56 @@ function AddArticle (props) {
   const getTypeInfo = () => {
     getTypeInfoRequest().then(res => {
       if (res.message === '没有登录') {
-        localStorage.removeItem('openId')
+        storage.remove('openId')
         props.history.push('/')
       } else {
         setTypeInfo(res.data)
       }
     })
+  }
+
+  // 博客标题
+  const updateArticleTitle = (event) => {
+    event.preventDefault()
+    setArticleTitle(event.target.value)
+  }
+  const handleCreateDate = (date, dateString) => {
+    console.log(date, dateString)
+    setCreateDate(dateString)
+  }
+  const handleUpdateDate = (date, dateString) => {
+    console.log(date, dateString)
+    setUpdateDate(dateString)
+  }
+  // 提交保存文章
+  const handleSubmitArticle = () => {
+    if (!selectedType) {
+      message.error('必须选择文章类别')
+      return false
+    } else if (!articleTitle) {
+      message.error('文章名称不能为空')
+      return false
+    } else if (!articleContent) {
+      message.error('文章内容不能为空')
+      return false
+    } else if (!introduceMarkdown) {
+      message.error('简介不能为空')
+      return false
+    } else if (!createDate) {
+      message.error('发布日期不能为空')
+      return false
+    } else if (!updateDate) {
+      // message.error('更新日期不能为空')
+      // return false
+    }
+    message.success('检验通过')
+
+    const dataProps = {}
+    dataProps.type_id = selectedType
+    dataProps.title = articleTitle
+    dataProps.content = articleContent
+    dataProps.introduce = introduceMarkdown
+    console.log(dataProps)
   }
 
   return (
@@ -73,7 +118,12 @@ function AddArticle (props) {
         <Col span={18}>
           <Row gutter={10}>
             <Col span={20}>
-              <Input placeholder='博客标题' size='large' />
+              <Input
+                value={articleTitle}
+                placeholder='博客标题'
+                size='large'
+                onChange={updateArticleTitle}
+              />
             </Col>
             <Col span={4}>
               &nbsp;
@@ -110,7 +160,7 @@ function AddArticle (props) {
             <Col span={24}>
               <Button size='large'>暂存文章</Button>
               &nbsp;
-              <Button type='primary' size='large' onClick={() => {}}>发布文章</Button>
+              <Button type='primary' size='large' onClick={handleSubmitArticle}>发布文章</Button>
               <br />
             </Col>
           </Row>
@@ -136,6 +186,7 @@ function AddArticle (props) {
             <Col span={12}>
               <div className='date-select'>
                 <DatePicker
+                  onChange={handleCreateDate}
                   placeholder='发布日期'
                   size='large'
                 />
@@ -144,6 +195,7 @@ function AddArticle (props) {
             <Col span={12}>
               <div className='date-select'>
                 <DatePicker
+                  onChange={handleUpdateDate}
                   placeholder='修改日期'
                   size='large'
                 />
