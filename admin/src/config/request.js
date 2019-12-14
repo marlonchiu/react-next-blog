@@ -20,3 +20,13 @@ export const getTypeInfoRequest = () => {
     withCredentials: true // 前端后端共享 session
   })
 }
+
+// 添加文章
+export const addArticleRequest = (data) => {
+  return axiosInstance({
+    method: 'post',
+    url: servicePath.addArticle,
+    data,
+    withCredentials: true // 前端后端共享 session
+  })
+}

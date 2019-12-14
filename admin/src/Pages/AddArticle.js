@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import marked from 'marked'
 import '../static/css/AddArticle.css'
-import { getTypeInfoRequest } from '../config/request'
+import { getTypeInfoRequest, addArticleRequest } from '../config/request'
 import storage from 'good-storage'
 import { Row, Col, Input, Select, Button, DatePicker, message } from 'antd'
 const { Option } = Select
@@ -109,7 +109,23 @@ function AddArticle (props) {
     dataProps.title = articleTitle
     dataProps.content = articleContent
     dataProps.introduce = introduceMarkdown
+    const dateText = createDate.replace('-', '/')
+    dataProps.addTime = (new Date(dateText).getTime()) / 1000
     console.log(dataProps)
+
+    if (articleId === 0) {
+      console.log('articleId=:' + articleId)
+      dataProps.view_count = Math.ceil(Math.random() * 100) + 1000
+
+      addArticleRequest(dataProps).then(res => {
+        setArticleId(res.data.insertId)
+        if (res.data.isSuccess) {
+          message.success('文章保存成功')
+        } else {
+          message.error('文章保存失败')
+        }
+      })
+    }
   }
 
   return (
