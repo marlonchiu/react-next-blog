@@ -43,12 +43,16 @@ class MainController extends Controller {
 
   // 添加文章
   async addArticle () {
-    let tmpArticle= this.ctx.request.body
+    let tmpArticle = this.ctx.request.body
+    console.log(tmpArticle)
     const result = await this.app.mysql.insert('article', tmpArticle)
     const insertSuccess = result.affectedRows === 1
     const insertId = result.insertId
 
-    this.ctx.body = { insertSuccess, insertId }
+    this.ctx.body = {
+      insertSuccess: insertSuccess,
+      insertId: insertId
+    }
   }
 }
 
