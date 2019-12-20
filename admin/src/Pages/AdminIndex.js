@@ -28,8 +28,8 @@ function AdminIndex (props) {
     <Layout style={{ minHeight: '100vh' }}>
       <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
         <div className='logo' />
-        <Menu theme='dark' defaultSelectedKeys={['1']} mode='inline'>
-          <Menu.Item key='1'>
+        <Menu theme='dark' defaultSelectedKeys={['home']} mode='inline'>
+          <Menu.Item key='home'>
             <Icon type='home' />
             <span>工作台</span>
           </Menu.Item>
@@ -50,7 +50,7 @@ function AdminIndex (props) {
             <Menu.Item key='addArticle'>添加文章</Menu.Item>
             <Menu.Item key='articleList'>文章列表</Menu.Item>
           </SubMenu>
-          <Menu.Item key='9'>
+          <Menu.Item key='message'>
             <Icon type='message' />
             <span>留言管理</span>
           </Menu.Item>

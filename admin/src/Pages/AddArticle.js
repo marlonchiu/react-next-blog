@@ -75,7 +75,6 @@ function AddArticle (props) {
   }
 
   const handleCreateDate = (date, dateString) => {
-    console.log(date, dateString)
     setCreateDate(dateString)
   }
 
