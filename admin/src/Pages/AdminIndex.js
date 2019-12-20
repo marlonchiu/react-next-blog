@@ -1,17 +1,29 @@
 import React, { useState } from 'react'
 import { Route } from 'react-router-dom'
 import AddArticle from './AddArticle'
+import ArticleList from './ArticleList'
 import { Layout, Menu, Breadcrumb, Icon } from 'antd'
 import '../static/css/AdminIndex.css'
 const { Content, Footer, Sider } = Layout
 const { SubMenu } = Menu
 
-function AdminIndex () {
+function AdminIndex (props) {
   const [collapsed, setCollapsed] = useState(false)
 
   const onCollapse = collapsed => {
     setCollapsed(collapsed)
   }
+
+  const handleClickArticle = (e) => {
+    // console.log(e)
+    // console.log(e.item.props)
+    if (e.key === 'addArticle') {
+      props.history.push('/article/add')
+    } else if (e.key === 'articleList') {
+      props.history.push('/article/list')
+    }
+  }
+
   return (
     <Layout style={{ minHeight: '100vh' }}>
       <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
@@ -26,7 +38,8 @@ function AdminIndex () {
             <span>添加文章</span>
           </Menu.Item>
           <SubMenu
-            key='sub1'
+            key='article'
+            onClick={handleClickArticle}
             title={
               <span>
                 <Icon type='appstore' />
@@ -34,8 +47,8 @@ function AdminIndex () {
               </span>
             }
           >
-            <Menu.Item key='3'>添加文章</Menu.Item>
-            <Menu.Item key='4'>文章列表</Menu.Item>
+            <Menu.Item key='addArticle'>添加文章</Menu.Item>
+            <Menu.Item key='articleList'>文章列表</Menu.Item>
           </SubMenu>
           <Menu.Item key='9'>
             <Icon type='message' />
@@ -53,6 +66,9 @@ function AdminIndex () {
           <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
             <div>
               <Route path='/index/' exact component={AddArticle} />
+              <Route path='/article/add/' exact component={AddArticle} />
+              <Route path='/article/add/:id' exact component={AddArticle} />
+              <Route path='/article/list/' component={ArticleList} />
             </div>
           </div>
         </Content>

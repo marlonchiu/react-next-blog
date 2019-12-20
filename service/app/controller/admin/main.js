@@ -50,8 +50,22 @@ class MainController extends Controller {
     const insertId = result.insertId
 
     this.ctx.body = {
-      insertSuccess: insertSuccess,
-      insertId: insertId
+      isSuccess: insertSuccess,
+      data: {
+        insertId: insertId
+      }
+    }
+  }
+
+  // 更新文章
+  async updateArticle () {
+    let tmpArticle = this.ctx.request.body
+    const result = await this.app.mysql.update('article', tmpArticle)
+    const updateSuccess = result.affectedRows === 1
+    console.log(updateSuccess)
+
+    this.ctx.body = {
+      isSuccess: updateSuccess
     }
   }
 }

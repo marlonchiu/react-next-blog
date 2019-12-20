@@ -30,3 +30,14 @@ export const addArticleRequest = (data) => {
     withCredentials: true // 前端后端共享 session
   })
 }
+
+// 更新文章
+export const updateArticleRequest = (data) => {
+  return axiosInstance({
+    method: 'post',
+    url: servicePath.updateArticle,
+    data,
+    header: { 'Access-Control-Allow-Origin': '*' },
+    withCredentials: true // 前端后端共享 session
+  })
+}
