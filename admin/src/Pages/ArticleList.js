@@ -1,21 +1,41 @@
 import React, { useState, useEffect } from 'react'
 import '../static/css/ArticleList.css'
-import { List, Row, Col, Button } from 'antd'
+import { List, Row, Col, Button, message, Modal } from 'antd'
+import { getArticleListRequest, deleteArticleRequest } from '../config/request'
+const { confirm } = Modal
 
 function ArticleList (props) {
-  console.log(props)
+  // console.log(props)
   const [list, setList] = useState([])
 
-  useEffect(() => {
-    setList([
-      {
-        title: '123',
-        typeName: '123',
-        addTime: '123',
-        part_count: '123',
-        view_count: '123'
+  const getArticleList = () => {
+    getArticleListRequest().then(res => {
+      setList(res.list)
+    })
+  }
+
+  const deleteArticleItem = (id) => {
+    deleteArticleRequest(id).then(res => {
+      message.success('文章删除成功')
+      getArticleList()
+    })
+  }
+
+  const handleDeleteItem = (item) => {
+    confirm({
+      title: `确定要删除${item.title}博客文章吗?`,
+      content: '如果你点击OK按钮，文章将会永远被删除，无法恢复。',
+      onOk () {
+        deleteArticleItem(item.id)
+      },
+      onCancel () {
+        message.success('没有任何改变')
       }
-    ])
+    })
+  }
+
+  useEffect(() => {
+    getArticleList()
   }, [])
 
   const Header = () => {
@@ -49,7 +69,7 @@ function ArticleList (props) {
               <Col span={3}>{item.view_count}</Col>
               <Col span={3}>
                 <Button type='primary'>修改</Button>&nbsp;
-                <Button>删除 </Button>
+                <Button onClick={() => handleDeleteItem(item)}>删除</Button>
               </Col>
             </Row>
           </List.Item>

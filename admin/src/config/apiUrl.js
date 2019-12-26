@@ -4,7 +4,9 @@ const servicePath = {
   checkLogin: 'checkLogin', // 检查用户名密码是否正确
   getTypeInfo: 'getTypeInfo', // 获得文章类别信息
   addArticle: 'addArticle', // 添加文章
-  updateArticle: 'updateArticle' // 更新文章
+  updateArticle: 'updateArticle', // 更新文章
+  getArticleList: 'getArticleList', // 获取文章列表
+  deleteArticle: 'deleteArticle/' // 删除文章
 }
 
 export default servicePath

@@ -68,6 +68,34 @@ class MainController extends Controller {
       isSuccess: updateSuccess
     }
   }
+
+  // 获取文章列表
+  async getArticleList () {
+    const sql =
+      'SELECT article.id as id,' +
+      'article.title as title,' +
+      'article.introduce as introduce,' +
+      'article.view_count as view_count,' +
+      "FROM_UNIXTIME(article.addTime,'%Y-%m-%d' ) as addTime," +
+      'type.typeName as typeName ' +
+      'FROM article LEFT JOIN type ON article.type_id = type.id ' +
+      'ORDER BY article.id DESC '
+
+    const dataList = await this.app.mysql.query(sql)
+
+    this.ctx.body = {
+      list: dataList
+    }
+  }
+
+  // 删除文章
+  async deleteArticle () {
+    const id = this.ctx.params.id
+    const res = await this.app.mysql.delete('article', { 'id': id })
+    this.ctx.body = {
+      data: res
+    }
+}
 }
 
 module.exports = MainController

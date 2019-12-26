@@ -41,3 +41,23 @@ export const updateArticleRequest = (data) => {
     withCredentials: true // 前端后端共享 session
   })
 }
+
+// 获取文章列表
+export const getArticleListRequest = () => {
+  return axiosInstance({
+    method: 'get',
+    url: servicePath.getArticleList,
+    header: { 'Access-Control-Allow-Origin': '*' },
+    withCredentials: true // 前端后端共享 session
+  })
+}
+
+// 删除文章
+export const deleteArticleRequest = (id) => {
+  return axiosInstance({
+    method: 'get',
+    url: servicePath.deleteArticle + id,
+    header: { 'Access-Control-Allow-Origin': '*' },
+    withCredentials: true // 前端后端共享 session
+  })
+}
