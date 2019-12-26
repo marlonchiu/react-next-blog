@@ -94,6 +94,10 @@
   color: #ff502c;
 }
 
+.introduce-html img {
+  width: 100%;
+}
+
 .introduce-html blockquote {
   border-left: 4px solid #cbcbcb;
   padding: 10px 10px 10px 30px;

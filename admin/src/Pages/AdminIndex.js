@@ -14,6 +14,10 @@ function AdminIndex (props) {
     setCollapsed(collapsed)
   }
 
+  const handleClickDesk = (e) => {
+    props.history.push('/home')
+  }
+
   const handleClickArticle = (e) => {
     // console.log(e)
     // console.log(e.item.props)
@@ -28,14 +32,10 @@ function AdminIndex (props) {
     <Layout style={{ minHeight: '100vh' }}>
       <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
         <div className='logo' />
-        <Menu theme='dark' defaultSelectedKeys={['home']} mode='inline'>
-          <Menu.Item key='home'>
+        <Menu theme='dark' defaultSelectedKeys={['desk']} mode='inline'>
+          <Menu.Item key='desk' onClick={handleClickDesk}>
             <Icon type='home' />
             <span>工作台</span>
-          </Menu.Item>
-          <Menu.Item key='2'>
-            <Icon type='desktop' />
-            <span>添加文章</span>
           </Menu.Item>
           <SubMenu
             key='article'
@@ -65,7 +65,7 @@ function AdminIndex (props) {
           </Breadcrumb>
           <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
             <div>
-              <Route path='/index/' exact component={AddArticle} />
+              <Route path='/home' exact component={AddArticle} />
               <Route path='/article/add/' exact component={AddArticle} />
               <Route path='/article/add/:id' exact component={AddArticle} />
               <Route path='/article/list/' component={ArticleList} />

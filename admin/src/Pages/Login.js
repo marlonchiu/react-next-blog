@@ -1,13 +1,23 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, createContext } from 'react'
 import storage from 'good-storage'
 import { Card, Input, Icon, Button, Spin, message } from 'antd'
 import '../static/css/Login.css'
 import { checkLoginRequest } from '../config/request'
 
+const openIdContext = createContext()
+
 function Login (props) {
   const [userName, setUserName] = useState('admin')
   const [password, setPassword] = useState('')
   const [isLoading, setIsLoading] = useState(false)
+
+  // 检测是否登录
+  useEffect(() => {
+    const openId = storage.get('openId')
+    if (openId) {
+      props.history.push('/index')
+    }
+  }, [])
 
   // 登录
   const checkLogin = () => {
