@@ -95,7 +95,29 @@ class MainController extends Controller {
     this.ctx.body = {
       data: res
     }
-}
+  }
+
+  // 根据文章ID得到文章详情，用于修改文章
+  async getArticleById () {
+    const id = this.ctx.params.id
+
+    const sql =
+      'SELECT article.id as id,' +
+      'article.title as title,' +
+      'article.introduce as introduce,' +
+      'article.content as content,' +
+      "FROM_UNIXTIME(article.addTime,'%Y-%m-%d' ) as addTime," +
+      'article.view_count as view_count,' +
+      'type.typeName as typeName, ' +
+      'type.id as type_id ' +
+      'FROM article LEFT JOIN type ON article.type_id = type.id ' +
+      'WHERE article.id = ' + id
+
+    const result = await this.app.mysql.query(sql)
+    this.ctx.body = {
+      data: result
+    }
+  }
 }
 
 module.exports = MainController

@@ -6,7 +6,8 @@ const servicePath = {
   addArticle: 'addArticle', // 添加文章
   updateArticle: 'updateArticle', // 更新文章
   getArticleList: 'getArticleList', // 获取文章列表
-  deleteArticle: 'deleteArticle/' // 删除文章
+  deleteArticle: 'deleteArticle/', // 删除文章
+  getArticleById: 'getArticleById/' // 根据ID获得文章详情
 }
 
 export default servicePath

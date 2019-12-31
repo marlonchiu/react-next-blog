@@ -34,6 +34,10 @@ function ArticleList (props) {
     })
   }
 
+  const handleUpdateItem = (item) => {
+    props.history.push('/article/add/' + item.id)
+  }
+
   useEffect(() => {
     getArticleList()
   }, [])
@@ -68,7 +72,7 @@ function ArticleList (props) {
               <Col span={3}>{item.view_count}</Col>
               <Col span={3}>{item.view_count}</Col>
               <Col span={3}>
-                <Button type='primary'>修改</Button>&nbsp;
+                <Button type='primary' onClick={() => handleUpdateItem(item)}>修改</Button>&nbsp;
                 <Button onClick={() => handleDeleteItem(item)}>删除</Button>
               </Col>
             </Row>

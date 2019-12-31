@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import marked from 'marked'
 import '../static/css/AddArticle.css'
-import { getTypeInfoRequest, addArticleRequest, updateArticleRequest } from '../config/request'
+import { getTypeInfoRequest, addArticleRequest, updateArticleRequest ,getArticleByIdRequest } from '../config/request'
 import storage from 'good-storage'
 import { Row, Col, Input, Select, Button, DatePicker, message } from 'antd'
 const { Option } = Select
@@ -25,6 +25,12 @@ function AddArticle (props) {
 
   useEffect(() => {
     getTypeInfo()
+    // 获得文章ID
+    const tmpId = props.match.params.id
+    if (tmpId) {
+      setArticleId(tmpId)
+      getArticleById(tmpId)
+    }
   }, [])
 
   const renderer = new marked.Renderer()
@@ -65,6 +71,32 @@ function AddArticle (props) {
       } else {
         setTypeInfo(res.data)
       }
+    })
+  }
+
+  // 获取文章详情
+  const getArticleById = (id) => {
+    getArticleByIdRequest(id).then(res => {
+      console.log(res.data)
+      const {
+        title,
+        content,
+        addTime,
+        introduce,
+        type_id
+      } = res.data[0]
+
+      setArticleTitle(title)
+      // 简介
+      setIntroduceMarkdown(introduce)
+      const introduceHtml = marked(introduce)
+      setIntroduceHtml(introduceHtml)
+      // 文章
+      setArticleContent(content)
+      const introduceContent = marked(content)
+      setMarkdownContent(introduceContent)
+      setCreateDate(addTime)
+      setSelectType(type_id)
     })
   }
 

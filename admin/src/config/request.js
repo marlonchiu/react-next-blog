@@ -61,3 +61,13 @@ export const deleteArticleRequest = (id) => {
     withCredentials: true // 前端后端共享 session
   })
 }
+
+// 根据ID获得文章详情
+export const getArticleByIdRequest = (id) => {
+  return axiosInstance({
+    method: 'get',
+    url: servicePath.getArticleById + id,
+    header: { 'Access-Control-Allow-Origin': '*' },
+    withCredentials: true // 前端后端共享 session
+  })
+}
